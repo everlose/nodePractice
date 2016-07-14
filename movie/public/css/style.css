@@ -1,0 +1,32 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a:hover, a:focus {
+	color: #2a6496;
+	text-decoration: none;
+	outline: none;
+}
+
+.tar{
+	text-align: right;
+}
+.tac{
+	text-align: center;
+}
+ul.breadcrumb{
+	background: #FFF;
+	margin: 0;
+	padding-left: 0;
+}
+
+/* == clearfix == */ 
+.clearfix:after { 
+    content: ''; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    overflow: hidden; 
+} 
+.clearfix{*zoom:1;}

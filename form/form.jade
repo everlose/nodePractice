@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        title 模拟表单提交
+    body
+        form(action="/submit", method="post")
+            用户名：
+            input(type="text", name="user" placeholder="5个字以内" value="#{user}")
+            密码：
+            input(type="password", name="password")
+            性别：
+            - if (sex === 'm')
+                label 男
+                input(type="radio", name="sex" value="m" checked)
+                label 女
+                input(type="radio", name="sex" value="w")
+            - else if (sex == 'w')
+                label 男
+                input(type="radio", name="sex" value="m")
+                label 女
+                input(type="radio", name="sex" value="w" checked)
+            - else 
+                label 男
+                input(type="radio", name="sex" value="m")
+                label 女
+                input(type="radio", name="sex" value="w")
+            生日：
+            input(type="date", name="birthday" value="#{birthday}")
+            手机号码：
+            input(type="text", name="phone" value="#{phone}")
+            个性签名：
+            input(type="text", name="desc" placeholder="20个字以内" value="#{desc}")
+            button upload
+        div #{info}

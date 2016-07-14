@@ -1,0 +1,176 @@
+{
+    factoryWarranty: "2年12个月",
+    carAssessorName: "{{string|10}}",
+    colorName: "白色",
+    carId: "23e18af3968d46339662dbdd17d86548",
+    mileage: "{{num}}.00",
+    newPrice: "{{num|1-99}}.57",
+    status: "ok",
+    internetPrice: "{{num|1-99}}.00",
+    carPic: "files/default/cc0b9a52dfac55099ae55c6906b138dc",
+    qrCode: "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQFg8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0lFeFJoMDdsU1kwd2VHaUVqbUN4AAIEFLM_VgMEAAAAAA==",
+    userDefinedNumber: "MH2004",
+    isInsuranceExpired: "无",
+    engineVolumeName: "0.0L",
+    purchaseTax: "20128",
+    emissionStandardName: "国四",
+    shopName: "杭州旗舰店",
+    newPriceIncludeTax: "25.57",
+    carName: "安凯客车2014款  宝斯通  3.0T VIP版安凯客车20安凯客车安",
+    salePrice: "12.00",
+    logo: "20160621/png/2483501699f54c92ccc52db001860f53.png",
+    reportId: '94r982eAaIaXacG',
+    firstLicensePlateDate: {{date|0-10}},
+    insuranceExpiresDate: 1480521600000,
+    commercialInsuranceExpiresDate: 1480521600000,
+    sparePrice: "13.57",
+    summary: "哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈哈哈哈，，这个是一个测试哇哈",
+    customTagList: [
+        {
+            "dateCreate": 1466756599000,
+            "dateUpdate": 1466756599000,
+            "id": "FYaUz1VXwn",
+            "store": "000055",
+            "type": "tag",
+            "value": "嘿嘿嘿"
+        },
+        {
+            "dateCreate": 1466752393000,
+            "dateUpdate": 1466752393000,
+            "id": "1uK2VEWK4J",
+            "store": "000055",
+            "type": "tag",
+            "value": "空调"
+        },
+        {
+            "dateCreate": 1466752393000,
+            "dateUpdate": 1466752393000,
+            "id": "GcgdQxRPqh",
+            "store": "000055",
+            "type": "tag",
+            "value": "空调"
+        },
+        {
+            "dateCreate": 1466752393000,
+            "dateUpdate": 1466752393000,
+            "id": "V7gNw9MM2T",
+            "store": "000055",
+            "type": "tag",
+            "value": "空调"
+        },
+        {
+            "dateCreate": 1466752393000,
+            "dateUpdate": 1466752393000,
+            "id": "XAwjzhD46E",
+            "store": "000055",
+            "type": "tag",
+            "value": "空调"
+        },
+        {
+            "dateCreate": 1466580003000,
+            "dateUpdate": 1466580003000,
+            "id": "dx8ccelTc3",
+            "store": "000055",
+            "type": "tag",
+            "value": "时光的风格的是电"
+        }
+    ],
+    defaultTagList: [
+        {
+            "selected": false,
+            "type": "fbsz",
+            "value": "防抱死制动系统"
+        },
+        {
+            "selected": false,
+            "type": "aqql",
+            "value": "安全气囊"
+        },
+        {
+            "selected": true,
+            "type": "brakeAssist",
+            "value": "刹车辅助系统"
+        },
+        {
+            "selected": true,
+            "type": "stabilityControl",
+            "value": "车身稳定控制系统"
+        },
+        {
+            "selected": false,
+            "type": "backMirrorElectricAdjustment",
+            "value": "后视镜电动调节"
+        },
+        {
+            "selected": false,
+            "type": "ddxt",
+            "value": "导航"
+        },
+        {
+            "selected": false,
+            "type": "dvdd",
+            "value": "CD／DVD"
+        },
+        {
+            "selected": false,
+            "type": "zdhw",
+            "value": "空调"
+        },
+        {
+            "selected": false,
+            "type": "centralDoorLock",
+            "value": "中控锁"
+        },
+        {
+            "selected": false,
+            "type": "remoteKey",
+            "value": "遥控钥匙"
+        },
+        {
+            "selected": false,
+            "type": "yjqd",
+            "value": "一键启动"
+        },
+        {
+            "selected": false,
+            "type": "qhdd",
+            "value": "电动车窗"
+        },
+        {
+            "selected": false,
+            "type": "backRada",
+            "value": "倒车雷达"
+        },
+        {
+            "selected": false,
+            "type": "dcyx",
+            "value": "倒车影像"
+        },
+        {
+            "selected": false,
+            "type": "spareWheel",
+            "value": "备用轮胎"
+        },
+        {
+            "selected": false,
+            "type": "dsxh",
+            "value": "定速巡航"
+        },
+        {
+            "selected": false,
+            "type": "qjtc",
+            "value": "天窗"
+        },
+        {
+            "selected": false,
+            "type": "leatherSeat",
+            "value": "真皮座椅"
+        },
+        {
+            "selected": false,
+            "type": "ddtj",
+            "value": "前座椅电动调节"
+        }
+    ]
+
+}

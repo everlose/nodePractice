@@ -1,0 +1,13 @@
+{
+  "name": "ch04",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "~4.13.0",
+    "html": "~0.0.10",
+    "express": "~2.3.4"
+  }
+}

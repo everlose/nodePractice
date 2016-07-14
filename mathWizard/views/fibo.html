@@ -1,0 +1,11 @@
+<% include layout.html %>
+<% if(req.a) { %>
+	<p class="result">
+		fibonacci <%= req.a %> = <%= req.result %> 
+	</p>
+<% } %>
+<p>Enter numbers to fibonacci</p>
+<form action="/fibonacci" name="fibonacci" method="get">
+	A: <input type="text" name="a" /><br />
+	<input type="submit" value="submit" />
+</form>'

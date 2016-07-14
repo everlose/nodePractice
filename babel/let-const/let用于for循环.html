@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>let疑问</title>
+</head>
+<body>
+
+<script src="../node_modules/babel-core/browser.js"></script>
+<script type="text/babel">
+//疑问，必包里的i应该指向的是父函数变量i的引用，因此到了执行的时候，i变成10，结果也是10. 难道let一次建立了很多个i变量了吗？
+// var a = [];
+// for (var i = 0; i < 10; i++) {
+// 	a[i] = function () {
+// 		console.log(i);
+// 	};
+// }
+// a[6](); // 10
+
+// var a = [];
+// for (let i = 0; i < 10; i++) {
+// 	a[i] = function () {
+// 		console.log(i);
+// 	};
+// }
+// a[6](); // 6
+
+</script>
+</body>
+</html>

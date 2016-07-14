@@ -1,0 +1,11 @@
+<% include layout.html %>
+<% if(req.a) { %>
+	<p class="result">
+		<%= req.a %> squared = <%= req.result %> 
+	</p>
+<% } %>
+<p>Enter numbers to square</p>
+<form action="/square" name="square" method="get">
+	A: <input type="text" name="a" /><br />
+	<input type="submit" value="submit" />
+</form>'

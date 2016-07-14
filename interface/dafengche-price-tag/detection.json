@@ -1,0 +1,40 @@
+{
+    "success": true,
+    "code": 10000,
+    "msg": "success",
+    "data": {
+        "processorName": "13685846898",
+        "auditPassDate": "2016-06-16",
+        "level": "A",
+        "slogan": "专业事故鉴定，如错包退！\n100% 真实描述，如错包赔！",
+        "cheniu_promise_rule_url": "http://f2e.souche.com/cheniu/detail/detect_promise.html",
+        "cheniu_level_rule_url": "http://f2e.souche.com/cheniu/detail/rate_rule.html?level=A%2B%2B",
+        "summary": [
+            {
+                "total": 30,
+                "abnormal": 1,
+                "name": "事故排查",
+                "link": "accident"
+            },
+            {
+                "total": 51,
+                "abnormal": 0,
+                "name": "外观内饰",
+                "link": "appearance"
+            },
+            {
+                "total": 5,
+                "abnormal": 0,
+                "name": "机械部件",
+                "link": "machine"
+            },
+            {
+                "total": 7,
+                "abnormal": 0,
+                "name": "电器检测",
+                "link": "appliance"
+            }
+        ],
+        "remark": ""
+    }
+}

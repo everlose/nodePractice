@@ -1,0 +1,15 @@
+{
+  "name": "immoc",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "~3.5.0",
+    "jade": "~1.11.0",
+    "moment": "~2.10.0",
+    "mongoose": "~4.2.0",
+    "underscore": "~1.8.0"
+  }
+}

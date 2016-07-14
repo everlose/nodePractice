@@ -1,0 +1,15 @@
+{
+  "name": "h5",
+  "description": "h5 basic",
+  "main": "",
+  "authors": [
+    "chentongta@163.com"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "h5"
+  ],
+  "dependencies": {
+    "zepto": "^1.1.0"
+  }
+}

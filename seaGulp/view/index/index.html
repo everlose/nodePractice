@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<link rel="stylesheet" href="../../static/build/base.css">
+</head>
+<body>
+	index
+	
+	<script src="../../static/build/base.js"></script>
+	<script>
+		
+		// seajs 的简单配置
+		seajs.config({
+		    base : '../../static/src/biz',
+		    charset: 'utf-8'
+		});
+		
+		// 加载入口模块
+		seajs.use("../../static/src/biz/index/index.js");
+
+		// 线上环境的话
+		// seajs.config({
+		//     base : '../../static/build',
+		//     charset: 'utf-8'
+		// });
+		// seajs.use("../../static/build/index.min.js");
+	</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "babel-cli": "^6.7.5"
+  },
+  "scripts": {
+    "build": "babel ./test.js -d lib"
+  }
+}

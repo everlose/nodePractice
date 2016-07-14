@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>uploader练习</title>
+    <link rel="stylesheet" href="/staticfile/uploadify.css">
+</head>
+<body>
+    <!-- <form action="/upload" enctype="multipart/form-data" method="post">
+        <input type="file" name="upload">
+        <button>Upload file</button>
+    </form> -->
+    <!-- <input type="file" name="file" id="J_up_office"/> -->
+    <div class="J_uploadify_img c-uploadify-img" id="upload"></div>
+
+
+    <script src="/staticfile/jquery-1.11.0.js"></script>
+    <script src="/staticfile/jquery.uploadify-3.1.js"></script>
+    <script>
+        $('#upload').uploadify({
+            swf: './staticfile/uploadify.swf',
+            uploader: '/upload',
+            cancelImg: './staticfile/uploadify-cancel.png',
+            buttonText: '上传图片',
+            fileTypeDesc: 'Image Files',
+            fileTypeExts: '*.gif; *.jpg; *.png',
+            multi: true,
+            onUploadStart : function(file) {//当文件选择对话框关闭时触发
+                console.log('start');
+            },
+            onUploadSuccess: function (file, data, response) {
+                data = JSON.parse(data);
+                if (data.success) {
+                    $('body').append('<div class="up-img">' +
+                        '<img src="' + data.url + '" width="85" height="105" data-src="' + data.path + '"/>' + 
+                        '<div class="cancel" data-src="' + data.path + '">x</div>' +
+                        '</div>'
+                    );
+                }
+            }
+        });
+    </script>
+</body>
+</html>

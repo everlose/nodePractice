@@ -1,0 +1,12 @@
+<% include layout.html %>
+<% if(req.a && req.b) {%>
+	<p class="result">
+		<%= req.a %> * <%= req.b %> = <%= req.result %> 
+	</p>
+<% } %>
+<p>Enter numbers to multiply</p>
+<form action="/mult" name="mult" method="get">
+	A: <input type="text" name="a" /><br />
+	B: <input type="text" name="b" />
+	<input type="submit" value="submit" />
+</form>'

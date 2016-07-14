@@ -1,0 +1,60 @@
+// @desc grid for mobile
+@charset "utf-8";
+
+//
+//通用栅格生成器makeGrid
+//@grid-column-width:11rem;//列宽 单位rem
+//@grid-gutter-width:2rem;//槽宽
+//@grid-offset:3rem;//body 2边间距 视觉稿上的列边距
+//@grid-name:grid; 一般为[grid/grid-thin/grid-fat] grid命名 可选视觉规范上的三种
+//
+.makeGrid(@grid-column-width, @grid-gutter-width, @grid-offset, @grid-name:grid) {
+  @grid-columns: 12;
+
+  .@{grid-name} {
+    box-sizing:content-box;
+    padding-left: @grid-offset;
+    padding-right: @grid-offset;
+    margin-left: 0 - @grid-gutter-width;
+  }
+
+  .@{grid-name}:before,
+  .@{grid-name}:after{
+    content: " ";
+    display: table;
+  }
+
+  .@{grid-name}:after {
+    clear: both;
+  }
+
+  .@{grid-name} [class^="col-"] {
+    margin-left: @grid-gutter-width;
+    float: left;
+  }
+  .@{grid-name} .gutter-bottom{
+    margin-bottom: @grid-gutter-width;
+  }
+  .@{grid-name} .gutter-right{
+    margin-right: @grid-gutter-width;
+  }
+  .makeCommonGrid(1);
+}
+
+.makeCommonGrid(@index) when (@index < @grid-columns + 1) {
+.@{grid-name} .col-@{index} {
+  width: @grid-column-width * @index + @grid-gutter-width * @index - @grid-gutter-width;
+}
+.@{grid-name} .row-@{index} {
+  height: @grid-column-width * @index + @grid-gutter-width * @index - @grid-gutter-width;
+}
+  .makeCommonGrid(@index + 1);
+}
+
+// 生成 grid
+.renderGrid(){
+  .makeGrid(1.1rem, 0.2rem, 0.3rem, grid);
+  .makeGrid(1.0rem, 0.25rem, 0.6125rem, grid-fat);
+  .makeGrid(1.15rem, 0.2rem, 0rem, grid-thin);
+  //.makeGrid(0.9rem, 0.4rem, 0.4rem, grid-thin);
+}
