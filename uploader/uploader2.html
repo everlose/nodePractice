@@ -34,30 +34,24 @@
 </head>
 <body>
     <div class="photo-add">
-        <img class="item-image" src="http://img.souche.com/20160909/png/b60e6046a9d96f05af37d03090f32a33.png" alt="">
+        <img class="item-image" src="http://7xn4mw.com1.z0.glb.clouddn.com/16-9-13/13827291.jpg" alt="">
 
-        <input type="file" accept="image/*" multiple="true"
+        <input type="file" accept="image/*" multiple
             name="uploader-input" 
             class="uploader-file"
             id="upload">
     </div>
     
-    <div id="box">
-        <div class="photo-item">
-
-            <img class="item-image" width="100%" height="100%" src="http://localhost:8066/tmp/upload_fa9e6310f4d7ea4c84a4407a7b09bdfd.png">
-        </div>
-        <div class="photo-item">
-
-            <img class="item-image" width="100%" height="100%" src="http://localhost:8066/tmp/upload_0d2a8d293c1a8bfa70d9906eb0515f89.png">
-        </div>
-    </div>
+    <div id="box"></div>
     
 
 
     <script src="/staticfile/jquery-1.11.0.js"></script>
     <script>
-        document.getElementById('upload').addEventListener('change', function (event) {
+        document
+        .getElementById('upload')
+        .addEventListener('change', function (event) {
+
             var $file = event.currentTarget;
             var formData = new FormData();
             var file = $file.files;
@@ -75,25 +69,22 @@
                 })
                 .done(data => {
                     $('#box').append(`<div class="photo-item">
-
                         <img class="item-image" width="100%" height="100%" src="${data.url}"/>
                     </div>`);
                 })
                 .fail(data => {
                     console.log(data);
                 });
-                // .always(() => {
-                //     console.log('complete');
-                // });
             }
         });
-
+        
         var temp;
         $('#box')
         .on('dragstart', '.photo-item', function (e) {
             temp = this;
         })
         .on('dragover', '.photo-item', function (e) {
+            //此事件切记要preventDefault，否则接下来将不会触发drop事件
             e.preventDefault();
         })
         .on('drop', '.photo-item', function (e) {
@@ -101,6 +92,7 @@
             temp.innerHTML = this.innerHTML;
             this.innerHTML = sourceHTML;
         });
+
     </script>
 </body>
 </html>
