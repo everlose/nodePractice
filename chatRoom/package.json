@@ -1,0 +1,14 @@
+{
+  "name": "chatRoom",
+  "version": "0.0.1",
+  "description": "this is chatRoom demo for nodejs",
+  "dependencies": {
+    "socket.io": "~0.9.16"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>H5原生的comet长连接</title>
+    <style>
+        body {
+            width:640px;
+            margin:20px 30px;
+        }
+        #status {
+            width:10px;
+            height: 10px;
+            border-radius: 50%;
+            position: absolute;
+            top:15px;
+            left: 0;
+            margin:10px;
+            background: #999;
+        }
+        #status.working {
+            -webkit-animation: flash 1s infinite;
+            -webkit-animation-direction: alternate;
+        }
+        #msg {
+            max-height: 300px;
+            overflow: auto;
+            border-radius: 5px;
+            border:1px solid #ccc;
+            margin:20px 0;
+            padding: 5px 15px;
+            background: #eee;
+        }
+        #msg li {
+            margin:5px 20px;
+        }
+        @-webkit-keyframes  flash {
+            from {
+                box-shadow: 0 0 5px green;
+                background: green;
+            }
+            to {
+                box-shadow: 0 0 12px green;
+                background: green;
+            }
+         }
+    </style>
+</head>
+<body>
+    <p>用node.js实现HTML5原生的comet(长连接)，原文地址：https://cnodejs.org/topic/5463840472f405c829029f62</p>
+    <div id="status"></div>
+    <button id="switch">开启</button>
+    <button id="clean">清空</button>
+
+    <ol id="msg"></ol>
+    <script>
+    var Btn = function () {
+        this._switch = document.querySelector('#switch');
+        this._clean  = document.querySelector('#clean');
+        this._msg    = document.querySelector('#msg');
+        this._status = document.querySelector('#status');
+        this.es = null;
+        this.init();
+    };
+    Btn.prototype.init = function () {
+        var that = this;
+        var _msg = that._msg;
+        that._clean.addEventListener('click', function () {
+            _msg.innerHTML = '';
+        });
+        that._switch.addEventListener('click', function () {
+            if(this.innerText === '开启') {
+                that.on();
+            } else {
+                that.off();
+            }
+        });
+        that.on();
+    };
+    Btn.prototype.on = function () {
+        var that = this;
+        // 1. 声明EventSource
+        that.es = new EventSource('/msg');
+        // 2. 监听数据
+        that.es.onmessage = function (e) {
+            document.querySelector('#msg').innerHTML += '<li>'+ e.data +'</li>'
+        };
+        that._switch.innerText = '关掉';
+        that._status.classList.add('working');
+    };
+    Btn.prototype.off = function () {
+        this.es.close();
+        this._switch.innerText = '开启';
+        this._status.classList.remove('working');
+    };
+    new Btn();
+    </script>
+</body>
+</html>

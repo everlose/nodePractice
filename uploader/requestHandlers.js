@@ -20,22 +20,6 @@ function start(response) {
         }
         
     });
-    // var body = '<html>'+
-    //     '<head>'+
-    //     '<meta http-equiv="Content-Type" content="text/html; '+
-    //     'charset=UTF-8" />'+
-    //     '</head>'+
-    //     '<body>'+
-    //     '<form action="/upload" enctype="multipart/form-data" method="post">'+
-    //     '<input type="file" name="upload">'+
-    //     '<button>Upload file</button>'+
-    //     '</form>'+
-    //     '</body>'+
-    //     '</html>';
-
-    // response.writeHead(200, {"Content-Type": "text/html"});
-    // response.write(body);
-    // response.end();
 
 }
 
@@ -62,10 +46,33 @@ function upload(response, request) {
     //     response.write('<img src="/show" />');
     //     response.end();
     // });
+
+    // var form = new formidable.IncomingForm();
+    // form.parse(request, function(error, fields, files) {
+    //     var filepath = files.Filedata.path,
+    //         newpath = '/tmp' + filepath.slice(filepath.lastIndexOf('/')) + '.png';
+    //     //给文件重命名
+    //     var readStream = fs.createReadStream(filepath)
+    //     var writeStream = fs.createWriteStream(__dirname + newpath);
+    //     console.log(filepath);
+    //     readStream.on('data', function (data) {
+    //         writeStream.write(data);
+    //     });
+    //     readStream.on('end', function(){
+    //         console.log('文件读取完成');
+    //         writeStream.end();
+    //         response.writeHead(200, {"Content-Type": "text/json"});
+    //         response.write('{"success": true, "path": "' + newpath + '", "url": "' + request.headers.origin + newpath +'"}');
+    //         response.end();
+    //     });
+    // });
+    
     var form = new formidable.IncomingForm();
     form.parse(request, function(error, fields, files) {
-        var filepath = files.Filedata.path,
-            newpath = '/tmp' + filepath.slice(filepath.lastIndexOf('/')) + '.png';
+        var key = Object.keys(files);
+        var filepath = files[key].path;
+        console.log(filepath);
+        var newpath = '/tmp' + filepath.slice(filepath.lastIndexOf('/')) + '.png';
         //给文件重命名
         var readStream = fs.createReadStream(filepath)
         var writeStream = fs.createWriteStream(__dirname + newpath);
@@ -99,7 +106,10 @@ function show(response) {
 }
 
 function staticfile(response, request, pathname) {
-
+    if (pathname === '/favicon.ico') {
+        response.end();
+        return;
+    }
     //静态资源服务器
     //fs.readFile(filename,[options],callback);
     //console.log("Request staticfile：" + pathname);

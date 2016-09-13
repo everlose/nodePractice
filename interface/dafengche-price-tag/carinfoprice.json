@@ -11,6 +11,7 @@
     qrCode: "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQFg8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0lFeFJoMDdsU1kwd2VHaUVqbUN4AAIEFLM_VgMEAAAAAA==",
     userDefinedNumber: "MH2004",
     isInsuranceExpired: "无",
+    isNewCar: 0, //0二手，1新车
     engineVolumeName: "0.0L",
     purchaseTax: "20128",
     emissionStandardName: "国四",

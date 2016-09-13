@@ -7,14 +7,14 @@ function start(route, handle) {
         var pathname = url.parse(request.url).pathname;
 
         if (pathname === '/favicon.ico') {
-            return;
+            response.end();
         }
         console.log("Request for " + pathname + " received.");
 
         route(handle, pathname, response, request);
     }
-    http.createServer(onRequest).listen(3000);
-    console.log("Server has started.");
+    http.createServer(onRequest).listen(8066);
+    console.log("Server has started at port 8066 ");
 }
 
 exports.start = start;

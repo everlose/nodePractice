@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>uploader，使用h5的formData，并且支持拖动排序</title>
+    <style>
+        .photo-item, .photo-add {
+            position: relative;
+                float: left;
+                width: 120px;
+                height: 90px;
+                margin-bottom: 52px;
+                margin-right: 16px;
+            }
+        }
+
+        .item-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .uploader-file {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="photo-add">
+        <img class="item-image" src="http://img.souche.com/20160909/png/b60e6046a9d96f05af37d03090f32a33.png" alt="">
+
+        <input type="file" accept="image/*" multiple="true"
+            name="uploader-input" 
+            class="uploader-file"
+            id="upload">
+    </div>
+    
+    <div id="box">
+        <div class="photo-item">
+
+            <img class="item-image" width="100%" height="100%" src="http://localhost:8066/tmp/upload_fa9e6310f4d7ea4c84a4407a7b09bdfd.png">
+        </div>
+        <div class="photo-item">
+
+            <img class="item-image" width="100%" height="100%" src="http://localhost:8066/tmp/upload_0d2a8d293c1a8bfa70d9906eb0515f89.png">
+        </div>
+    </div>
+    
+
+
+    <script src="/staticfile/jquery-1.11.0.js"></script>
+    <script>
+        document.getElementById('upload').addEventListener('change', function (event) {
+            var $file = event.currentTarget;
+            var formData = new FormData();
+            var file = $file.files;
+            for (var i = 0; i < file.length; i++) {
+                // 文件名称，文件对象
+                formData = new FormData();
+                formData.append(file[i].name, file[i]);
+                $.ajax({
+                    url: '/upload',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: formData,
+                    contentType: false,
+                    processData: false
+                })
+                .done(data => {
+                    $('#box').append(`<div class="photo-item">
+
+                        <img class="item-image" width="100%" height="100%" src="${data.url}"/>
+                    </div>`);
+                })
+                .fail(data => {
+                    console.log(data);
+                });
+                // .always(() => {
+                //     console.log('complete');
+                // });
+            }
+        });
+
+        var temp;
+        $('#box')
+        .on('dragstart', '.photo-item', function (e) {
+            temp = this;
+        })
+        .on('dragover', '.photo-item', function (e) {
+            e.preventDefault();
+        })
+        .on('drop', '.photo-item', function (e) {
+            var sourceHTML = temp.innerHTML;
+            temp.innerHTML = this.innerHTML;
+            this.innerHTML = sourceHTML;
+        });
+    </script>
+</body>
+</html>

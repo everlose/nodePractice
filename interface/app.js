@@ -27,11 +27,11 @@ function start() {
                     
                     //有callback字段则为jsonp请求。
                     if (params.query && params.query.callback) {
-                         var str = params.query.callback + '(' + deal(file) + ')';
-                         response.end(str);  
-                     } else {  
-                         response.end(deal(file));//普通的json  
-                     }
+                        var str = params.query.callback + '(' + deal(file) + ')';
+                        response.end(str);  
+                    } else {  
+                        response.end(deal(file));//普通的json  
+                    }
                     
                 }
             });
