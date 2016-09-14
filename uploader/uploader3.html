@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>uploader，使用h5的formData，并且支持拖动排序</title>
+    <style>
+        .photo-item, .photo-add {
+            position: relative;
+                float: left;
+                width: 120px;
+                height: 90px;
+                margin-bottom: 52px;
+                margin-right: 16px;
+            }
+        }
+
+        .item-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .uploader-file {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="photo-add">
+        <img class="item-image" src="http://7xn4mw.com1.z0.glb.clouddn.com/16-9-13/13827291.jpg" alt="">
+
+        <input type="file" accept="image/*" multiple
+            name="uploader-input" 
+            class="uploader-file"
+            id="upload">
+    </div>
+    <div id="box"></div>
+
+    <script src="/staticfile/jquery-1.11.0.js"></script>
+    <script>
+        function compressImg(imgData, file, maxHeight, maxWidth, onCompress) {
+            if (!imgData) return;
+            onCompress = onCompress || function() {};
+            maxHeight = maxHeight || 1000; //默认最大高度200px
+            maxWidth = maxWidth || 1000; //默认最大高度200px
+            
+            var canvas = document.createElement('canvas');
+            var img = new Image();
+            img.onload = function() {
+                if (img.height > maxHeight) { //按最大高度等比缩放
+                    img.width = Math.round(img.width * (maxHeight / img.height));
+                    img.height = maxHeight;
+                }
+                if (img.width > maxWidth) { //按最大高度等比缩放
+                    img.height = Math.round(img.height * (maxWidth / img.width));
+                    img.width = maxWidth;
+                }
+                var ctx = canvas.getContext('2d');
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // canvas清屏
+                //重置canvans宽高 canvas.width = img.width; canvas.height = img.height;
+                ctx.drawImage(img, 0, 0, img.width, img.height); // 将图像绘制到canvas上 
+
+                var base64 = canvas.toDataURL(file.type, 0.65);
+                var text = window.atob(base64.split(',')[1]);
+                var buffer = new ArrayBuffer(text.length);
+                var ubuffer = new Uint8Array(buffer);
+                for (var i = 0; i < text.length; i++) {
+                    ubuffer[i] = text.charCodeAt(i);
+                }
+                var Builder = window.WebKitBlobBuilder || window.MozBlobBuilder;
+                var blob;
+                if (Builder) {
+                    var builder = new Builder();
+                    builder.append(buffer);
+                    blob = builder.getBlob(file.type);
+                } else {
+                    blob = new window.Blob([buffer], {type: file.type});
+                }
+                //必须等压缩完才读取canvas值，否则canvas内容是黑帆布
+                //canvas.toDataURL的第二个参数决定了图片的质量，笔者在此写死0.65
+                onCompress(blob, file.name, file.type); 
+            };
+
+            // 记住必须先绑定事件，才能设置src属性，否则img没内容可以画到canvas
+            img.src = imgData;
+        }
+
+        document
+        .getElementById('upload')
+        .addEventListener('change', function (event) {
+
+            var $file = event.currentTarget;
+            var file = $file.files;
+            var FR;
+            for (var i = 0; i < file.length; i++) {
+                FR = new FileReader();
+                FR.readAsDataURL(file[i]); //先注册onload，再读取文件内容，否则读取内容是空的
+                FR.onload = (function (targetFile) {
+                    return function (previewObj) {
+                        compressImg(previewObj.target.result, targetFile, 800, 1000,
+                            function(compressData, name, type) {
+
+                            var formData = new FormData();
+                            //压缩完成后执行的callback
+                            formData.append('upload', compressData, name);
+                            $.ajax({
+                                url: '/upload2',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: formData,
+                                contentType: false,
+                                processData: false
+                            })
+                            .done(res => {
+                                console.log(res.path);
+                            })
+                            .fail(res => {
+                                console.log(res);
+                            });
+                            $('#box').append(`<div class="photo-item">
+                                <img class="item-image" width="100%" height="100%" src="${previewObj.target.result}"/>
+                            </div>`);
+                        });
+                    }
+                })(file[i]);
+            }
+        });
+        
+        var temp;
+        $('#box')
+        .on('dragstart', '.photo-item', function (e) {
+            temp = this;
+        })
+        .on('dragover', '.photo-item', function (e) {
+            //此事件切记要preventDefault，否则接下来将不会触发drop事件
+            e.preventDefault();
+        })
+        .on('drop', '.photo-item', function (e) {
+            var sourceHTML = temp.innerHTML;
+            temp.innerHTML = this.innerHTML;
+            this.innerHTML = sourceHTML;
+        });
+
+    </script>
+</body>
+</html>

@@ -41,40 +41,97 @@
             class="uploader-file"
             id="upload">
     </div>
-    
     <div id="box"></div>
-    
-
 
     <script src="/staticfile/jquery-1.11.0.js"></script>
     <script>
+        var uploadFn = function (formData) {
+            //发送到服务端
+            $.ajax({
+                url: '/upload2',
+                type: 'POST',
+                dataType: 'json',
+                data: formData,
+                contentType: false,
+                processData: false
+            })
+            .done(res => {
+                $('#box').append(`<div class="photo-item">
+                    <img class="item-image" width="100%" height="100%" src="${res.url}"/>
+                </div>`);
+                console.log(res.path);
+            })
+            .fail(res => {
+                console.log(res);
+            });
+        };
+        var compass = function (imgObj, type, maxWidth, maxHeight, encoderOptions) {
+
+            //生成比例
+            if (imgObj.height > maxHeight) { //按最大高度等比缩放
+                imgObj.width = Math.round(imgObj.width * (maxHeight / imgObj.height));
+                imgObj.height = maxHeight;
+            }
+            if (imgObj.width > maxWidth) { //按最大高度等比缩放
+                imgObj.height = Math.round(imgObj.height * (maxWidth / imgObj.width));
+                imgObj.width = maxWidth;
+            }
+
+            //生成canvas
+            var $canvas = document.createElement('canvas');
+            var ctx = $canvas.getContext('2d');
+            $canvas.width = imgObj.width;
+            $canvas.height = imgObj.height;
+            ctx.drawImage(imgObj, 0, 0, $canvas.width, $canvas.height);
+            //canvas.toDataURL的第二个参数决定了图片的质量
+            var base64 = $canvas.toDataURL(type, encoderOptions);
+            $canvas = null;
+
+            var text = window.atob(base64.split(',')[1]);
+            var buffer = new ArrayBuffer(text.length);
+            var ubuffer = new Uint8Array(buffer);
+            for (var i = 0; i < text.length; i++) {
+                ubuffer[i] = text.charCodeAt(i);
+            }
+            var Builder = window.WebKitBlobBuilder || window.MozBlobBuilder;
+            var blob;
+            if (Builder) {
+                var builder = new Builder();
+                builder.append(buffer);
+                blob = builder.getBlob(type);
+            } else {
+                blob = new window.Blob([buffer], {type: type});
+            }
+
+            return blob;
+        };
+
         document
         .getElementById('upload')
         .addEventListener('change', function (event) {
 
             var $file = event.currentTarget;
-            var formData = new FormData();
             var file = $file.files;
             for (var i = 0; i < file.length; i++) {
-                // 文件名称，文件对象
-                formData = new FormData();
-                formData.append(file[i].name, file[i]);
-                $.ajax({
-                    url: '/upload',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: formData,
-                    contentType: false,
-                    processData: false
-                })
-                .done(data => {
-                    $('#box').append(`<div class="photo-item">
-                        <img class="item-image" width="100%" height="100%" src="${data.url}"/>
-                    </div>`);
-                })
-                .fail(data => {
-                    console.log(data);
-                });
+                var url = window.URL.createObjectURL(file[i]);
+                var $img = new Image();
+                $img.src = url;
+                $img.onload = (function (sourceFile) {
+                    return function () {
+                        var formData = new FormData();
+
+                        //png图片不需要canvas压缩，不然会越压越大
+                        if (sourceFile.type === 'image/png') {
+                            formData.append('upload', sourceFile, sourceFile.name);
+                        } else {
+                            formData.append('upload',
+                                compass(this, sourceFile.type, 1000, 800, 0.65),
+                                sourceFile.name);
+                        }
+                        uploadFn(formData);
+                        
+                    }
+                })(file[i])
             }
         });
         

@@ -23,9 +23,7 @@ function start(response) {
 
 }
 
-function upload(response, request) {
-    console.log("Request handler 'upload' was called.");
-
+function upload (response, request) {
     // var form = new formidable.IncomingForm();
     // console.log('about to parse');
     // form.parse(request, function(error, fields, files) {
@@ -47,26 +45,28 @@ function upload(response, request) {
     //     response.end();
     // });
 
-    // var form = new formidable.IncomingForm();
-    // form.parse(request, function(error, fields, files) {
-    //     var filepath = files.Filedata.path,
-    //         newpath = '/tmp' + filepath.slice(filepath.lastIndexOf('/')) + '.png';
-    //     //给文件重命名
-    //     var readStream = fs.createReadStream(filepath)
-    //     var writeStream = fs.createWriteStream(__dirname + newpath);
-    //     console.log(filepath);
-    //     readStream.on('data', function (data) {
-    //         writeStream.write(data);
-    //     });
-    //     readStream.on('end', function(){
-    //         console.log('文件读取完成');
-    //         writeStream.end();
-    //         response.writeHead(200, {"Content-Type": "text/json"});
-    //         response.write('{"success": true, "path": "' + newpath + '", "url": "' + request.headers.origin + newpath +'"}');
-    //         response.end();
-    //     });
-    // });
-    
+    var form = new formidable.IncomingForm();
+    form.parse(request, function(error, fields, files) {
+        var filepath = files.Filedata.path,
+            newpath = '/tmp' + filepath.slice(filepath.lastIndexOf('/')) + '.png';
+        //给文件重命名
+        var readStream = fs.createReadStream(filepath)
+        var writeStream = fs.createWriteStream(__dirname + newpath);
+        console.log(filepath);
+        readStream.on('data', function (data) {
+            writeStream.write(data);
+        });
+        readStream.on('end', function(){
+            console.log('文件读取完成');
+            writeStream.end();
+            response.writeHead(200, {"Content-Type": "text/json"});
+            response.write('{"success": true, "path": "' + newpath + '", "url": "' + request.headers.origin + newpath +'"}');
+            response.end();
+        });
+    });
+}
+
+function upload1 (response, request) {
     var form = new formidable.IncomingForm();
     form.parse(request, function(error, fields, files) {
         var key = Object.keys(files);
@@ -88,21 +88,47 @@ function upload(response, request) {
             response.end();
         });
     });
+
 }
 
-function show(response) {
-    console.log("Request handler 'show' was called.");
-    fs.readFile('./tmp/test.png', 'binary', function(error, file) {
-        if (error) {
-            response.writeHead(500, {'Content-Type': 'text/plain'});
-            response.write(error + '\n');
+function upload2(response, request) {
+    var form = new formidable.IncomingForm();
+    form.parse(request, function(error, fields, files) {
+        var key = Object.keys(files);
+        var filepath = files[key].path;
+        console.log(filepath);
+        var newpath = '/tmp' + filepath.slice(filepath.lastIndexOf('/')) + '.png';
+        //给文件重命名
+        var readStream = fs.createReadStream(filepath)
+        var writeStream = fs.createWriteStream(__dirname + newpath);
+        console.log(filepath);
+        readStream.on('data', function (data) {
+            writeStream.write(data);
+        });
+        readStream.on('end', function(){
+            console.log('文件读取完成');
+            writeStream.end();
+            response.writeHead(200, {"Content-Type": "text/json"});
+            response.write('{"success": true, "path": "' + newpath + '", "url": "' + request.headers.origin + newpath +'"}');
             response.end();
-        } else {
-            response.writeHead(200, {'Content-Type': 'image/png'});
-            response.write(file, 'binary');
-            response.end();
-        }
-    })
+        });
+        // var key = Object.keys(fields);
+        // var content = fields[key];
+        // var newpath = '/tmp/' + key;
+        // var buffer = Buffer.from(content, 'base64');
+        // fs.writeFile(__dirname + newpath, buffer, function(err) {
+        //     if (err) {
+        //         console.log(err);
+        //         response.end();
+        //         return;
+        //     }
+        //     response.writeHead(200, {"Content-Type": "text/json;charset=utf-8"});
+        //     response.write('{"success": true, "path": "' + newpath + '", "url": "' + request.headers.origin + newpath +'"}');
+        //     response.end();
+            
+        // });
+        
+    });
 }
 
 function staticfile(response, request, pathname) {
@@ -110,6 +136,7 @@ function staticfile(response, request, pathname) {
         response.end();
         return;
     }
+
     //静态资源服务器
     //fs.readFile(filename,[options],callback);
     //console.log("Request staticfile：" + pathname);
@@ -129,6 +156,8 @@ function staticfile(response, request, pathname) {
                 response.writeHead(200, {'Content-Type': 'text/css'});
             } else if (type === 'png') {
                 response.writeHead(200, {'Content-Type': 'image/png'});
+            } else if (type === 'jpg' || type === 'jpeg') {
+                response.writeHead(200, {'Content-Type': 'image/jpeg'});
             } else if (type === 'js') {
                 response.writeHead(200, {'Content-Type': 'text/javascript'});
             }
@@ -142,5 +171,6 @@ function staticfile(response, request, pathname) {
 
 exports.start = start;
 exports.upload = upload;
-exports.show = show;
+exports.upload1 = upload1;
+exports.upload2 = upload2;
 exports.staticfile = staticfile;

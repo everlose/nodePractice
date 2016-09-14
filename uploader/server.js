@@ -1,4 +1,5 @@
 //服务器
+var querystring = require('querystring');
 var http = require("http");
 var url = require("url");
 
@@ -10,8 +11,7 @@ function start(route, handle) {
             response.end();
         }
         console.log("Request for " + pathname + " received.");
-
-        route(handle, pathname, response, request);
+        route(handle, querystring.unescape(pathname), response, request);
     }
     http.createServer(onRequest).listen(8066);
     console.log("Server has started at port 8066 ");
