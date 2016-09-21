@@ -87,6 +87,7 @@
             var base64 = $canvas.toDataURL(type, encoderOptions);
             $canvas = null;
 
+            //window.atob()把数据从base64格式中解码，接着压入二进制数据的原始缓冲区，最后使用blob转为二进制文件。
             var text = window.atob(base64.split(',')[1]);
             var buffer = new ArrayBuffer(text.length);
             var ubuffer = new Uint8Array(buffer);

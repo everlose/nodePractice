@@ -36,7 +36,7 @@ css部分使用了一个障眼法，将input type=file的表单项设置为opaci
 }
 ```
 
-accept属性表示可以选择的文件MIME类型，多个MIME类型用英文逗号分开，常见MIME类型见[这里](http://ryanjoy.iteye.com/blog/1583584)。
+accept属性表示可以选择的文件MIME类型，多个MIME类型用英文逗号分开，常见MIME类型见[这里](http://ryanjoy.iteye.com/blog/1583584)。但是accept会使得浏览器调用文件选择界面的速度变慢，大概是与浏览器需要筛选不同类型的文件有关，不使用accept属性的话就不会有严重的延迟。
 
 ```html
 <div class="photo-add">
@@ -150,6 +150,9 @@ $('#box')
 ## 压缩图片
 
 需要canvas的支持，原理是利用了canvas定好所要生成的宽高，并且HTMLCanvasElement.toDataURL()的第二个参数代表着清晰度。这样就完成了裁剪和压缩的步骤。
+window.atob()表示从base64字符中解码，window.btob()表示编码为base64字符，chrome 4＋支持。
+ArrayBuffer表示二进制数据的原始缓冲区，该缓冲区用于存储各种类型化数组的数据。 无法直接读取或写入ArrayBuffer，但可根据需要将其传递到类型化数组或 DataView 对象 来解释原始缓冲区。
+blob的api是为了让buffer转化为二进制文件，在chrome 20版以上就支持
 
 js需要改写成下面的样子：
 
@@ -196,6 +199,7 @@ var compass = function (imgObj, type, maxWidth, maxHeight, encoderOptions) {
     var base64 = $canvas.toDataURL(type, encoderOptions);
     $canvas = null;
 
+    //window.atob()把数据从base64格式中解码，接着压入二进制数据的原始缓冲区，最后使用blob转为二进制文件。
     var text = window.atob(base64.split(',')[1]);
     var buffer = new ArrayBuffer(text.length);
     var ubuffer = new Uint8Array(buffer);
