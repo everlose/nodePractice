@@ -114,7 +114,7 @@ var start = function () {
             return getResourceUrl(url);
         } else {
             //不知道为什么总会在这里断掉，所以也在这里start一个。
-            start();
+            star();
             return Promise.reject('can not parse count file correct');
         }
         
@@ -132,8 +132,8 @@ var start = function () {
             var $elem = $(elem);
             var size = $elem.find('.label.label-warning').text();
             //小于4G则允许去获取
-            if (size && size.indexOf('GB') > -1 && parseInt(size) < 4 || 
-                size && size.indexOf('MB') > -1 && parseInt(size) > 700) {
+            if (size && size.indexOf('GB') > -1 && parseInt(size) < 4 ||
+                size && size.indexOf('MB') > -1 && parseInt(size) > 700 && parseInt(size) < 4000) {
                 var href = $elem.find('.title').attr('href');
                 reqArr.push(getMagnet({
                     hostname: config.origin,
@@ -205,9 +205,9 @@ event.on('parse_done', function(resArr, id) {
     });
     
     if (resArr) {
-        var text = '';
-        text += '\nname: ' + resArr[0].name + '\n';
+        var text = '\n';
         resArr.forEach(function (v, k) {
+            text += 'name: ' + v.name + '\n';
             text += 'size: ' + v.size + ' hasPic: ' + v.haspic + '\n';
             text += v.magnet + '\n';
         });
@@ -231,12 +231,12 @@ var config = {
     headers: {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
     },
-    searchSerie: 'SMD', //搜索的时候的参数前缀
-    torrentSerie: 'SMD', //种子的系列，也是存储的文件名
+    searchSerie: 'SKYHD0', //搜索的时候的参数前缀
+    torrentSerie: 'SKYHD', //种子的系列，也是存储的文件名
     folder: __dirname + '/welfare' //存储的路径
 };
 //种子存放路径
-config.torrentPath = config.folder + '/' + config.searchSerie + '.txt';
+config.torrentPath = config.folder + '/' + config.torrentSerie + '.txt';
 //计数器文件，存放每个种子系列已下载的最大番号
 config.countPath = config.folder + '/count';
 
