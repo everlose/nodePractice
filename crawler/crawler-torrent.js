@@ -229,7 +229,8 @@ var config = {
     path: '/search/', //搜索路径
     //搜索头部
     headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36',
+        'Referer': 'http://bt2.bt87.cc/'
     },
     searchSerie: 'SKYHD0', //搜索的时候的参数前缀
     torrentSerie: 'SKYHD', //种子的系列，也是存储的文件名

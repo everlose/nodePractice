@@ -1,20 +1,26 @@
 // 引入模块
 var http = require('http');
 var fs = require('fs');
-var request = require('request');
 
 //需要带上user－agent参数这个网站才会处理我的请求，不然会出现403错误
 var opt = {
-    hostname: 'www.mzitu.com',
+    //代理服务器的ip或者域名，默认localhost
+    host: '122.228.179.178',
+    //代理服务器的端口号，默认80
     port: 80,
-    path: '/share/comment-page-2',
-    agent: false,
+    //请求方法，默认get
+    method: 'GET',
+    //path是访问的路径
+    path: 'http://www.163.com',
+    //希望发送出去的请求头
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36',
+
     }
-}
-http.get(opt, function(res) {
+};
+
+//一个request请求，下面是接收的代码。
+var req = http.get(opt, function(res) {
     var data = '';
     res.setEncoding("utf8"); 
 
@@ -26,3 +32,4 @@ http.get(opt, function(res) {
     });
 });
 
+//console.log(req);

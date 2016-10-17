@@ -12,7 +12,6 @@ var Crawler = function(options) {
 
 Crawler.prototype = {
     init: function(options) {
-        this.baseUrl = options.baseUrl;
         this.url = options.url;
 
         this.dir = options.dir || '';
@@ -85,14 +84,11 @@ Crawler.prototype = {
 
 //需要带上User-Agent参数这个网站才会处理我的请求，不然会出现403错误
 var crawler = new Crawler({
-    baseUrl: 'http://www.mzitu.com/share/comment-page-', //对应的网址
     url: {
         hostname: 'www.mzitu.com',
-        port: 80,
-        path: '/share/comment-page-',
+        path: 'www.mzitu.com/share/comment-page-',
         agent: false,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
         }
     },
