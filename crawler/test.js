@@ -8,8 +8,6 @@ var opt = {
     host: '122.228.179.178',
     //代理服务器的端口号，默认80
     port: 80,
-    //请求方法，默认get
-    method: 'GET',
     //path是访问的路径
     path: 'http://www.163.com',
     //希望发送出去的请求头

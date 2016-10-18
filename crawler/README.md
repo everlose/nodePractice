@@ -35,7 +35,7 @@ torrentSerie: 'SKYHD', //种子的系列，也是存储的文件名
 
 ```
 url: {
-	hostname: '122.228.179.178', //代理设置
+    hostname: '122.228.179.178', //代理设置
     path: 'http://www.163.com',
     agent: false,
     headers: {
