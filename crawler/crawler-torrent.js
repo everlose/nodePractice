@@ -102,9 +102,9 @@ var start = function () {
             var match = countFile.match(reg)[0];
             searchId = match.slice(match.lastIndexOf(':') + 1);
             torrentId = searchId < 10 ? '0' + searchId : searchId;
-            var url = 'http://' + config.origin + config.path + config.searchSerie + 
+            var url = config.path + config.searchSerie + 
                 torrentId + '_ctime_1.html';
-            console.log('url: ', url);
+            console.log('list url: ', url);
             var opt = {
                 hostname: config.origin,
                 path: config.path + config.searchSerie + torrentId + '_ctime_1.html',
@@ -114,7 +114,7 @@ var start = function () {
             return getResourceUrl(url);
         } else {
             //不知道为什么总会在这里断掉，所以也在这里start一个。
-            star();
+            //star();
             return Promise.reject('can not parse count file correct');
         }
         
@@ -135,6 +135,7 @@ var start = function () {
             if (size && size.indexOf('GB') > -1 && parseInt(size) < 4 ||
                 size && size.indexOf('MB') > -1 && parseInt(size) > 700 && parseInt(size) < 4000) {
                 var href = $elem.find('.title').attr('href');
+                console.log('detail url: ' + href);
                 reqArr.push(getMagnet({
                     hostname: config.origin,
                     path: href,
@@ -148,7 +149,7 @@ var start = function () {
         } else {
             //当第二次请求正常或者第一次请求没有匹配到合适的资源，计数+1。
             event.emit('parse_done', null, searchId);
-            return Promise.reject('can not match suitable resource');
+            console.log('can not match suitable resource');
         }
     }, function (res) {
         return Promise.reject(res);
@@ -177,8 +178,8 @@ var start = function () {
             //当第二次请求正常或者第一次请求没有匹配到合适的资源，计数+1。
             event.emit('parse_done', null, searchId);
         }
-
     }, function (res) {
+        start();
         console.log(res);
     });
 };
@@ -197,9 +198,7 @@ event.on('parse_done', function(resArr, id) {
         return Promise.reject(res);
     })
     .then(function (res) {
-        if (!resArr) {
-            start();
-        }
+        start();
     }, function (res) {
         console.log(res);
     });
@@ -214,7 +213,7 @@ event.on('parse_done', function(resArr, id) {
 
         appendFile(config.torrentPath, text)
         .then(function (res) {
-            start();
+
         }, function (res) {
             console.log(res);
         });
@@ -226,14 +225,14 @@ event.on('parse_done', function(resArr, id) {
 //配置
 var config = {
     origin: 'bt2.bt87.cc', //搜索的域名
-    path: '/search/', //搜索路径
+    path: 'http://bt2.bt87.cc/search/', //搜索路径
     //搜索头部
     headers: {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36',
         'Referer': 'http://bt2.bt87.cc/'
     },
-    searchSerie: 'SKYHD0', //搜索的时候的参数前缀
-    torrentSerie: 'SKYHD', //种子的系列，也是存储的文件名
+    searchSerie: 'CWP', //搜索的时候的参数前缀
+    torrentSerie: 'CWP', //种子的系列，也是存储的文件名
     folder: __dirname + '/welfare' //存储的路径
 };
 //种子存放路径
