@@ -113,8 +113,6 @@ var start = function () {
             };
             return getResourceUrl(url);
         } else {
-            //不知道为什么总会在这里断掉，所以也在这里start一个。
-            //star();
             return Promise.reject('can not parse count file correct');
         }
         
@@ -139,7 +137,6 @@ var start = function () {
                 reqArr.push(getMagnet({
                     hostname: config.origin,
                     path: href,
-                    agent: false,
                     headers: config.headers
                 }));
             }
@@ -155,12 +152,13 @@ var start = function () {
         return Promise.reject(res);
     })
     .then(function (resArr) {
+        console.log('torrent search done!');
         var res = [];
         resArr.forEach(function (v, k) {
             var $ = cheerio.load(v);
             var name = $('.row-fluid.tor-title h2').text();
             var magnet = $('#magnetLink').val();
-            var size = $('.tor-detail').html().match(/\d+\.?\d+(MB|GB)/)[0];
+            var size = $('.tor-detail').html().match(/\d+(\.\d{1,2})?(MB|GB)/)[0];
             var haspic = $('.tor-info').html().match(/(png|jpg)/) ? true : false;
             res.push({
                 name: name,
@@ -169,6 +167,7 @@ var start = function () {
                 haspic: haspic
             });
         });
+
         if (res.length > 0) {
             console.log(res);
             // 事件驱动：发出图片地址解析完成的事件parse_done
@@ -179,13 +178,14 @@ var start = function () {
             event.emit('parse_done', null, searchId);
         }
     }, function (res) {
-        start();
         console.log(res);
+        start();
     });
 };
 
 // 事件监听：当监听到parse_done事件后，把res参数里的种子信息写入文件。
 event.on('parse_done', function(resArr, id) {
+    console.log('request parse done, ready for write file');
     //resArr存在的话，则写入具体的文件并计数文件内容+1，否则只是计数文件内容+1；
     var newId = +id + 1;
 
@@ -231,8 +231,8 @@ var config = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36',
         'Referer': 'http://bt2.bt87.cc/'
     },
-    searchSerie: 'CWP', //搜索的时候的参数前缀
-    torrentSerie: 'CWP', //种子的系列，也是存储的文件名
+    searchSerie: process.argv[2] || 'MCDV', //搜索的时候的参数前缀
+    torrentSerie: process.argv[2] || 'MCDV', //种子的系列，也是存储的文件名
     folder: __dirname + '/welfare' //存储的路径
 };
 //种子存放路径
