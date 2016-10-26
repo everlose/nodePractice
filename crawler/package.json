@@ -1,0 +1,19 @@
+{
+  "name": "crawler",
+  "version": "1.0.0",
+  "description": "爬虫练习",
+  "main": "crawler-torrent.js",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "爬虫"
+  ],
+  "author": "everlose",
+  "license": "ISC"
+}

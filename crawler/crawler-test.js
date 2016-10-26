@@ -1,6 +1,5 @@
 // 引入模块
 var http = require('http');
-var fs = require('fs');
 
 //需要带上user－agent参数这个网站才会处理我的请求，不然会出现403错误
 var opt = {
