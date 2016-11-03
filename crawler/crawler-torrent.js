@@ -117,7 +117,7 @@ var start = function () {
         }
         
     }, function (res) {
-        return Promise.reject(res);
+        return res;
     })
     .then(function (html) {
         var reqArr = [];
@@ -149,7 +149,7 @@ var start = function () {
             console.log('can not match suitable resource');
         }
     }, function (res) {
-        return Promise.reject(res);
+        return res;
     })
     .then(function (resArr) {
         console.log('torrent search done!');
@@ -231,7 +231,7 @@ var config = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36',
         'Referer': 'http://bt2.bt87.cc/'
     },
-    searchSerie: process.argv[2] || 'MCDV', //搜索的时候的参数前缀
+    searchSerie: process.argv[3] || process.argv[2] || 'MCDV', //搜索的时候的参数前缀
     torrentSerie: process.argv[2] || 'MCDV', //种子的系列，也是存储的文件名
     folder: __dirname + '/welfare' //存储的路径
 };
