@@ -1,0 +1,115 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'yeoman' ]
+2 info using npm@3.8.6
+3 info using node@v5.10.1
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData yeoman
+8 silly fetchNamedPackageData yeoman
+9 silly mapToRegistry name yeoman
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry http://registry.npm.souche-inc.com/
+12 silly mapToRegistry data Result {
+12 silly mapToRegistry   raw: 'yeoman',
+12 silly mapToRegistry   scope: null,
+12 silly mapToRegistry   name: 'yeoman',
+12 silly mapToRegistry   rawSpec: '',
+12 silly mapToRegistry   spec: 'latest',
+12 silly mapToRegistry   type: 'tag' }
+13 silly mapToRegistry uri http://registry.npm.souche-inc.com/yeoman
+14 verbose request uri http://registry.npm.souche-inc.com/yeoman
+15 verbose request no auth needed
+16 info attempt registry request try #1 at 23:43:23
+17 verbose request id 1077bf06e12a50c1
+18 http request GET http://registry.npm.souche-inc.com/yeoman
+19 http 403 http://registry.npm.souche-inc.com/yeoman
+20 verbose bad json <html>
+20 verbose bad json <head><title>403 Forbidden</title></head>
+20 verbose bad json <body bgcolor="white">
+20 verbose bad json <center><h1>403 Forbidden</h1></center>
+20 verbose bad json <hr><center>nginx</center>
+20 verbose bad json </body>
+20 verbose bad json </html>
+21 error registry error parsing json
+22 verbose headers { date: 'Sun, 27 Nov 2016 15:43:18 GMT',
+22 verbose headers   'content-type': 'text/html',
+22 verbose headers   'content-length': '162',
+22 verbose headers   connection: 'keep-alive' }
+23 silly get cb [ 403,
+23 silly get   { date: 'Sun, 27 Nov 2016 15:43:18 GMT',
+23 silly get     'content-type': 'text/html',
+23 silly get     'content-length': '162',
+23 silly get     connection: 'keep-alive' } ]
+24 silly fetchPackageMetaData SyntaxError: Unexpected token <
+24 silly fetchPackageMetaData <html>
+24 silly fetchPackageMetaData <head><title>403 Forbidden</title></head>
+24 silly fetchPackageMetaData <body bgcolor="white">
+24 silly fetchPackageMetaData <center><h1>403 Forbidden</h1></center>
+24 silly fetchPackageMetaData <hr><center>nginx</center>
+24 silly fetchPackageMetaData </body>
+24 silly fetchPackageMetaData </html>
+24 silly fetchPackageMetaData
+24 silly fetchPackageMetaData     at Object.parse (native)
+24 silly fetchPackageMetaData     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:199:23)
+24 silly fetchPackageMetaData     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+24 silly fetchPackageMetaData     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:199:22)
+24 silly fetchPackageMetaData     at emitTwo (events.js:100:13)
+24 silly fetchPackageMetaData     at Request.emit (events.js:185:7)
+24 silly fetchPackageMetaData     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1036:10)
+24 silly fetchPackageMetaData     at emitOne (events.js:95:20)
+24 silly fetchPackageMetaData     at Request.emit (events.js:182:7)
+24 silly fetchPackageMetaData     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:963:12)
+24 silly fetchPackageMetaData  error for yeoman [SyntaxError: Unexpected token <
+24 silly fetchPackageMetaData <html>
+24 silly fetchPackageMetaData <head><title>403 Forbidden</title></head>
+24 silly fetchPackageMetaData <body bgcolor="white">
+24 silly fetchPackageMetaData <center><h1>403 Forbidden</h1></center>
+24 silly fetchPackageMetaData <hr><center>nginx</center>
+24 silly fetchPackageMetaData </body>
+24 silly fetchPackageMetaData </html>
+24 silly fetchPackageMetaData ]
+25 silly rollbackFailedOptional Starting
+26 silly rollbackFailedOptional Finishing
+27 silly runTopLevelLifecycles Starting
+28 silly runTopLevelLifecycles Finishing
+29 silly install printInstalled
+30 verbose stack SyntaxError: Unexpected token <
+30 verbose stack <html>
+30 verbose stack <head><title>403 Forbidden</title></head>
+30 verbose stack <body bgcolor="white">
+30 verbose stack <center><h1>403 Forbidden</h1></center>
+30 verbose stack <hr><center>nginx</center>
+30 verbose stack </body>
+30 verbose stack </html>
+30 verbose stack
+30 verbose stack     at Object.parse (native)
+30 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:199:23)
+30 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+30 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:199:22)
+30 verbose stack     at emitTwo (events.js:100:13)
+30 verbose stack     at Request.emit (events.js:185:7)
+30 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1036:10)
+30 verbose stack     at emitOne (events.js:95:20)
+30 verbose stack     at Request.emit (events.js:182:7)
+30 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:963:12)
+31 verbose cwd /Users/everlose/workspace/github/nodePractice/seaGulp
+32 error Darwin 16.1.0
+33 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "yeoman"
+34 error node v5.10.1
+35 error npm  v3.8.6
+36 error Unexpected token <
+36 error <html>
+36 error <head><title>403 Forbidden</title></head>
+36 error <body bgcolor="white">
+36 error <center><h1>403 Forbidden</h1></center>
+36 error <hr><center>nginx</center>
+36 error </body>
+36 error </html>
+37 error If you need help, you may report this error at:
+37 error     <https://github.com/npm/npm/issues>
+38 verbose exit [ 1, true ]

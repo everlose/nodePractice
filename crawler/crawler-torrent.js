@@ -93,7 +93,7 @@ var getResourceUrl = function (url) {
 var start = function () {
     //初始化重新设置searchId
     var searchId = 1;
-    var torrentId = '01';
+    var torrentId = '1';
 
     getFile(config.countPath)
     .then(function (countFile) {
@@ -101,7 +101,7 @@ var start = function () {
         if (countFile.match(reg)) {
             var match = countFile.match(reg)[0];
             searchId = match.slice(match.lastIndexOf(':') + 1);
-            torrentId = searchId < 10 ? '0' + searchId : searchId;
+            torrentId = searchId;
             var url = config.path + config.searchSerie + 
                 torrentId + '_ctime_1.html';
             console.log('list url: ', url);
@@ -117,6 +117,7 @@ var start = function () {
         }
         
     }, function (res) {
+        console.log(res);
         return res;
     })
     .then(function (html) {
