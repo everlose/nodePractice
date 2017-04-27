@@ -1,0 +1,9 @@
+{
+  "name": "node-csv-tranform",
+  "version": "0.0.1",
+  "description": "csv转化",
+  "author": "陈子云 <chentongta@163.com>",
+  "scripts": {
+    "dev": "node server.js"
+  }
+}
